@@ -1,10 +1,16 @@
 package br.com.alura.modelos;
 
-public class Serie extends Titulo {
+import br.com.alura.calculos.Classificavel;
+
+public class Serie extends Titulo implements Classificavel {
     private int temporadas;
     private int episodiosPorTemporada;
     private boolean ativa;
     private int minutosPorEpisodio;
+
+    public Serie(String nome, int anoDeLancamento) {
+        super(nome, anoDeLancamento);
+    }
 
     public int getTemporadas() {
         return temporadas;
@@ -41,5 +47,16 @@ public class Serie extends Titulo {
     @Override
     public int getDuracaoEmMinutos() {
         return temporadas * episodiosPorTemporada * minutosPorEpisodio;
+    }
+
+    @Override
+    public int getClassificacao() {
+        if (temporadas >= 4) {
+            return 4;
+        } else if (temporadas >= 2) {
+            return 2;
+        } else {
+            return 1;
+        }
     }
 }
